@@ -4,6 +4,9 @@ import { ProductosComponent } from './productos/productos.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { GimnasiosComponent } from './gimnasios/gimnasios.component';
+import { MiGimnasioComponent } from './gimnasios/mi-gimnasio/mi-gimnasio.component';
+import { EditarGimnasioComponent } from './gimnasios/editar-gimnasio/editar-gimnasio.component';
 
 export const ROUTES: Routes = [
     { 
@@ -11,12 +14,16 @@ export const ROUTES: Routes = [
         component: HomeComponent
     },
     { 
-        path: 'productos',  
-        component: ProductosComponent
+        path: 'gimnasios',  
+        component: GimnasiosComponent
     },
     { 
-        path: 'usuarios',  
-        component: UsuariosComponent
+        path: 'editar-gimnasio',  
+        component: EditarGimnasioComponent
+    },
+    { 
+        path: 'mi-gimnasio',  
+        component: MiGimnasioComponent
     },
     {
         path: 'about',

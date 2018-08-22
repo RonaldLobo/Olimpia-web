@@ -1,0 +1,14 @@
+.gym-list {
+	margin: 50px 0 30px;
+	height: 400px;
+}
+.table-heading {
+	border-bottom: 2px solid gray;
+}
+.table-heading, .table-row{
+	text-align: center;
+}
+.check {
+	float: left;
+	margin-top: 5px;
+}

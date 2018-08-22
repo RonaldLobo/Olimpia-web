@@ -12,7 +12,11 @@ import { ProductosComponent } from './productos/productos.component';
 import { ProductoDisplayComponent } from './productos/producto-display/producto-display.component';
 import { AboutComponent } from './about/about.component';
 import { NavComponent } from './nav/nav.component';
+import { LeftNavComponent } from './left-nav/left-nav.component';
 import { HomeComponent } from './home/home.component';
+import { GimnasiosComponent } from './gimnasios/gimnasios.component';
+import { MiGimnasioComponent } from './gimnasios/mi-gimnasio/mi-gimnasio.component';
+import { EditarGimnasioComponent } from './gimnasios/editar-gimnasio/editar-gimnasio.component';
 import { ProductoAgregarComponent } from './productos/producto-agregar/producto-agregar.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioDisplayComponent } from './usuarios/usuario-display/usuario-display.component';
@@ -33,12 +37,16 @@ import { TextContainsValidator } from './shared/text-contains.directive';
     ProductoDisplayComponent,
     AboutComponent,
     NavComponent,
+    LeftNavComponent,
     HomeComponent,
     ProductoAgregarComponent,
     UsuariosComponent,
     UsuarioDisplayComponent,
     UsuarioAgregarComponent,
-    TextContainsValidator
+    TextContainsValidator,
+    GimnasiosComponent,
+    MiGimnasioComponent,
+    EditarGimnasioComponent
   ],
   imports: [
     BrowserModule,
