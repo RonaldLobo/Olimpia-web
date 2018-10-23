@@ -12,7 +12,8 @@ var app = express();
 var server;
 var enableDestroy = require('server-destroy');
 var configuration = require(__base + 'server/configuration');
-var mongoose = configuration.mongoose;
+// var mongoose = configuration.mongoose;
+var mysql = configuration.mysql;
 var routes = require(__base + '/server/routes');
 var port = process.env.PORT || 9095;
 

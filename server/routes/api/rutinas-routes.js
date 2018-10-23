@@ -6,11 +6,11 @@ var service = require(__base + 'server/services');
 var routes = require('express').Router();
 
 
-function getUsers(request, response) {
-    console.log('GET User');
+function getRutinas(request, response) {
+    console.log('GET rutina',request.params.id);
     var result;
     try {
-        result = await (service.usersService.getUser(request.params.id));
+        result = await (service.rutinasService.getRutina(request.params.id));
         return handlers.successResponseHandler(response, result);
     } catch (error) {
         console.log('error',error);
@@ -18,33 +18,33 @@ function getUsers(request, response) {
     }
 }
 
-function deleteUser(request, response) {
-    console.log('DELETE User');
+function deleteRutinas(request, response) {
+    console.log('DELETE rutina');
     var result;
     try {
-        result = await (service.usersService.deleteUser(request.params.id));
+        result = await (service.rutinasService.deleteRutina(request.params.id));
         return handlers.successResponseHandler(response, result);
     } catch (error) {
         return handlers.errorResponseHandler(response, error);
     }
 }
 
-function updateUser(request, response) {
-    console.log('UPDATE User');
+function updateRutinas(request, response) {
+    console.log('UPDATE rutina');
     var result;
     try {
-        result = await (service.usersService.updateUser(request.body.user));
+        result = await (service.rutinasService.updateRutina(request.body.rutina));
         return handlers.successResponseHandler(response, result);
     } catch (error) {
         return handlers.errorResponseHandler(response, error);
     }
 }
 
-function postUser(request, response) {
-    console.log('POST User',request.body);
+function postRutinas(request, response) {
+    console.log('POST rutina');
     var result;
     try {
-        result = await (service.usersService.postUser(request.body.user));
+        result = await (service.rutinasService.postRutina(request.body.rutina));
         return handlers.successResponseHandler(response, result);
     } catch (error) {
         if(error.code === 11000){
@@ -54,10 +54,10 @@ function postUser(request, response) {
     }
 }
 
-routes.get('/:id', async(getUsers));
-routes.get('/', async(getUsers));
-routes.delete('/:id', async(deleteUser));
-routes.put('/:id', async(updateUser));
-routes.post('/', async(postUser));
+routes.get('/:id', async(getRutinas));
+routes.get('/', async(getRutinas));
+routes.delete('/:id', async(deleteRutinas));
+routes.put('/:id', async(updateRutinas));
+routes.post('/', async(postRutinas));
 
 module.exports = routes;
