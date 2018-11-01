@@ -1,29 +1,35 @@
 var async = require('asyncawait/async');
 var await = require('asyncawait/await');
-var rutinaEjercicioModel = require(__base + 'server/model/rutinaEjercicio');
+var pool = require(__base + 'server/configuration').mysql;
 
 function getRutinaEjercicios() {
-    var rutinaEjercicios = await(rutinaEjercicioModel.find({}));
+    var rutinaEjercicios = await(pool.query('SELECT * FROM RutinaEjercicio'));
     return rutinaEjercicios;
 }
 
 function getRutinaEjercicio(id) {
-    var rutinaEjercicio = await(rutinaEjercicioModel.findOne({_id:id}));
+    var rutinaEjercicio = await(pool.query('SELECT * FROM RutinaEjercicio WHERE pkIdRutinaEjercicio='+id));
     return rutinaEjercicio;
 }
 
 function deleteRutinaEjercicio(id) {
-    var rutinaEjercicio = await(rutinaEjercicioModel.remove({_id:id}));
+    var rutinaEjercicio = await(pool.query('DELETE FROM RutinaEjercicio WHERE pkIdRutinaEjercicio='+id));
     return rutinaEjercicio;
 }
 
 function updateRutinaEjercicio(rutinaEjercicioParam) {
-    var rutinaEjercicio = await(rutinaEjercicioModel.update({_id:rutinaEjercicioParam._id},rutinaEjercicioParam));
+    var rutinaEjercicio = await(pool.query('UPDATE RutinaEjercicio SET fkIdRutinaEjercicio = ?, estado = ? WHERE pkIdRutinaEjercicio = ?', 
+        [
+            rutinaEjercicioParam.fkIdRutinaEjercicio,
+            rutinaEjercicioParam.estado, 
+            rutinaEjercicioParam.pkIdRutinaEjercicio
+        ]
+        ));
     return rutinaEjercicio;
 }
 
 function addRutinaEjercicio(rutinaEjercicioParam) {
-    var rutinaEjercicio = await(rutinaEjercicioModel.create(rutinaEjercicioParam));
+    var rutinaEjercicio = await(pool.query('INSERT INTO RutinaEjercicio SET ?', rutinaEjercicioParam));
     return rutinaEjercicio;
 }
 

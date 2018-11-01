@@ -18,13 +18,10 @@ function deleteRutina(id) {
 }
 
 function updateRutina(rutinaParam) {
-    var rutina = await(pool.query('UPDATE Rutina SET fkIdUsuarioRutina = ?, fkIdGimnasioRutina = ?, fbId = ?, telefono = ? , correo = ?, estado = ? WHERE pkIdRutina = ?', 
+    var rutina = await(pool.query('UPDATE Rutina SET fkIdGimnasioRutina = ?, fkIdUsuarioRutina = ?, estado = ? WHERE pkIdRutina = ?', 
         [
-            rutinaParam.nombre, 
-            rutinaParam.direccion, 
-            rutinaParam.fbId, 
-            rutinaParam.telefono, 
-            rutinaParam.correo, 
+            rutinaParam.fkIdGimnasioRutina, 
+            rutinaParam.fkIdUsuarioRutina,
             rutinaParam.estado, 
             rutinaParam.pkIdRutina
         ]

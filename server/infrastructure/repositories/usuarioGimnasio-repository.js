@@ -1,29 +1,37 @@
 var async = require('asyncawait/async');
 var await = require('asyncawait/await');
-var usuarioGimnasioModel = require(__base + 'server/model/usuarioGimnasio');
+var pool = require(__base + 'server/configuration').mysql;
 
 function getUsuarioGimnasios() {
-    var usuarioGimnasios = await(usuarioGimnasioModel.find({}));
+    var usuarioGimnasios = await(pool.query('SELECT * FROM UsuarioGimnasio'));
     return usuarioGimnasios;
 }
 
 function getUsuarioGimnasio(id) {
-    var usuarioGimnasio = await(usuarioGimnasioModel.findOne({_id:id}));
+    var usuarioGimnasio = await(pool.query('SELECT * FROM UsuarioGimnasio WHERE pkIdUsuarioGimnasio='+id));
     return usuarioGimnasio;
 }
 
 function deleteUsuarioGimnasio(id) {
-    var usuarioGimnasio = await(usuarioGimnasioModel.remove({_id:id}));
+    var usuarioGimnasio = await(pool.query('DELETE FROM UsuarioGimnasio WHERE pkIdUsuarioGimnasio='+id));
     return usuarioGimnasio;
 }
 
 function updateUsuarioGimnasio(usuarioGimnasioParam) {
-    var usuarioGimnasio = await(usuarioGimnasioModel.update({_id:usuarioGimnasioParam._id},usuarioGimnasioParam));
+    var usuarioGimnasio = await(pool.query('UPDATE UsuarioGimnasio SET fkIdUsuario = ?, fkIdGimnasio = ?, fechaIngreso = ?, estado = ? WHERE pkIdUsuarioGimnasio = ?', 
+        [
+            usuarioGimnasioParam.fkIdUsuario,
+            usuarioGimnasioParam.fkIdGimnasio,
+            usuarioGimnasioParam.fechaIngreso,
+            usuarioGimnasioParam.estado, 
+            usuarioGimnasioParam.pkIdUsuarioGimnasio
+        ]
+        ));
     return usuarioGimnasio;
 }
 
 function addUsuarioGimnasio(usuarioGimnasioParam) {
-    var usuarioGimnasio = await(usuarioGimnasioModel.create(usuarioGimnasioParam));
+    var usuarioGimnasio = await(pool.query('INSERT INTO UsuarioGimnasio SET ?', usuarioGimnasioParam));
     return usuarioGimnasio;
 }
 

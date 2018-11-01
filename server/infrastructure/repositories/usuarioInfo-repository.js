@@ -1,29 +1,47 @@
 var async = require('asyncawait/async');
 var await = require('asyncawait/await');
-var usuarioInfoModel = require(__base + 'server/model/usuarioInfo');
+var pool = require(__base + 'server/configuration').mysql;
 
 function getUsuarioInfos() {
-    var usuarioInfos = await(usuarioInfoModel.find({}));
+    var usuarioInfos = await(pool.query('SELECT * FROM UsuarioInfo'));
     return usuarioInfos;
 }
 
 function getUsuarioInfo(id) {
-    var usuarioInfo = await(usuarioInfoModel.findOne({_id:id}));
+    var usuarioInfo = await(pool.query('SELECT * FROM UsuarioInfo WHERE pkIdUsuarioInfo='+id));
     return usuarioInfo;
 }
 
 function deleteUsuarioInfo(id) {
-    var usuarioInfo = await(usuarioInfoModel.remove({_id:id}));
+    var usuarioInfo = await(pool.query('DELETE FROM UsuarioInfo WHERE pkIdUsuarioInfo='+id));
     return usuarioInfo;
 }
 
 function updateUsuarioInfo(usuarioInfoParam) {
-    var usuarioInfo = await(usuarioInfoModel.update({_id:usuarioInfoParam._id},usuarioInfoParam));
+    var usuarioInfo = await(pool.query('UPDATE UsuarioInfo SET fechaNacimiento = ?, altura = ?, peso = ?, porcentajeGrasa = ?, porcentajeMasaMagra = ?, brazo = ?, pierna = ?, pantorrilla = ?, cintura = ?, gluteos = ?, pecho = ?, espalda = ?, fkIdUsuarioInfo = ?, estado = ? WHERE pkIdUsuarioInfo = ?', 
+        [
+            usuarioInfoParam.fechaNacimiento,
+            usuarioInfoParam.altura,
+            usuarioInfoParam.peso,
+            usuarioInfoParam.porcentajeGrasa,
+            usuarioInfoParam.porcentajeMasaMagra,
+            usuarioInfoParam.brazo,
+            usuarioInfoParam.pierna,
+            usuarioInfoParam.pantorrilla,
+            usuarioInfoParam.cintura,
+            usuarioInfoParam.gluteos,
+            usuarioInfoParam.pecho,
+            usuarioInfoParam.espalda,
+            usuarioInfoParam.fkIdUsuarioInfo,
+            usuarioInfoParam.estado, 
+            usuarioInfoParam.pkIdUsuarioInfo
+        ]
+        ));
     return usuarioInfo;
 }
 
 function addUsuarioInfo(usuarioInfoParam) {
-    var usuarioInfo = await(usuarioInfoModel.create(usuarioInfoParam));
+    var usuarioInfo = await(pool.query('INSERT INTO UsuarioInfo SET ?', usuarioInfoParam));
     return usuarioInfo;
 }
 

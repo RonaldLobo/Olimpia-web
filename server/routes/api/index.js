@@ -9,6 +9,7 @@ var apiRoutes = loader(path, {removeAfterHyphen:true});
 
 function initializer(router, basePath) {
     _.each(apiRoutes, function(value, key, list) {
+    	console.log('reg',basePath + '/' + key);
         router.use(basePath + '/' + key, value);
     });
 }
